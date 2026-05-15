@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>✿ おもいでにっき ✿</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=M+PLUS+Rounded+1c:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header>
+    <div class="header-deco left">✿ ♡ ✿ ★ ✿</div>
+    <div class="header-title">
+      <span class="title-icon">🌸</span>
+      <h1>おもいでにっき</h1>
+      <span class="title-icon">🌸</span>
+    </div>
+    <div class="header-deco right">✿ ★ ✿ ♡ ✿</div>
+    <p class="header-sub">みんなとの大切な思い出をここに ✨</p>
+  </header>
+
+  <div class="add-btn-wrap">
+    <button class="add-btn" onclick="openAddModal()">
+      <span>＋</span> おもいでを追加
+    </button>
+  </div>
+
+  <main id="cards-container">
+    <div class="loading">✨ 読み込み中...</div>
+  </main>
+
+  <div id="empty-state" class="empty-state" style="display:none">
+    <div class="empty-icon">📷</div>
+    <p>まだ思い出がないよ♪<br>最初の思い出を追加しよう！</p>
+  </div>
+
+  <!-- 追加/編集モーダル -->
+  <div id="add-modal" class="modal-overlay" onclick="closeOnOverlay(event, 'add-modal')">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal('add-modal')">✕</button>
+      <h2 id="modal-title">✨ おもいでを追加</h2>
+      <div class="form-group">
+        <label>タイトル <span class="req">必須</span></label>
+        <input type="text" id="f-title" placeholder="どんな思い出？" />
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>日付 <span class="req">必須</span></label>
+          <input type="date" id="f-date" />
+        </div>
+        <div class="form-group">
+          <label>場所</label>
+          <input type="text" id="f-location" placeholder="どこに行った？" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>ひとこと</label>
+        <textarea id="f-desc" rows="4" placeholder="その日のことをつぶやいてみて♪"></textarea>
+      </div>
+      <div class="form-group">
+        <label>写真を追加</label>
+        <div class="photo-drop-area" id="drop-area" onclick="document.getElementById('f-photos').click()">
+          <span>📷 クリックまたはドラッグ＆ドロップ</span>
+          <input type="file" id="f-photos" multiple accept="image/*" style="display:none" onchange="handleFiles(this.files)" />
+        </div>
+        <div id="photo-preview" class="photo-preview-grid"></div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-cancel" onclick="closeModal('add-modal')">キャンセル</button>
+        <button class="btn-save" id="btn-save" onclick="saveMemory()">💾 保存する</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 詳細モーダル -->
+  <div id="detail-modal" class="modal-overlay" onclick="closeOnOverlay(event, 'detail-modal')">
+    <div class="modal-box detail-box">
+      <button class="modal-close" onclick="closeModal('detail-modal')">✕</button>
+      <div id="detail-content"></div>
+      <div class="modal-actions detail-actions">
+        <button class="btn-delete" onclick="deleteMemory()">🗑 削除</button>
+        <button class="btn-edit" onclick="editMemory()">✏️ 編集</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 削除確認モーダル -->
+  <div id="confirm-modal" class="modal-overlay" onclick="closeOnOverlay(event, 'confirm-modal')">
+    <div class="modal-box confirm-box">
+      <div class="confirm-icon">🌸</div>
+      <h3>本当に削除する？</h3>
+      <p>この思い出は消えてしまうよ…</p>
+      <div class="modal-actions">
+        <button class="btn-cancel" onclick="closeModal('confirm-modal')">やっぱりやめる</button>
+        <button class="btn-delete" onclick="confirmDelete()">削除する</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 写真ビューア -->
+  <div id="photo-viewer" class="photo-viewer-overlay" onclick="closePhotoViewer()">
+    <button class="viewer-close" onclick="closePhotoViewer()">✕</button>
+    <button class="viewer-prev" onclick="viewerPrev(event)">‹</button>
+    <img id="viewer-img" src="" alt="" />
+    <button class="viewer-next" onclick="viewerNext(event)">›</button>
+    <div id="viewer-counter" class="viewer-counter"></div>
+  </div>
+
+  <footer>
+    <p>✿ おもいでにっき ✿ &nbsp;|&nbsp; みんなとの大切な瞬間を閉じ込めよう ♡</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="app.js"></script>
+</body>
+</html>
