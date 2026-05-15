@@ -1,8 +1,8 @@
 // ============================================================
 //  ここにSupabaseの情報を入れてね（後で設定するよ）
 // ============================================================
-const SUPABASE_URL  = 'YOUR_SUPABASE_URL';
-const SUPABASE_ANON = 'YOUR_SUPABASE_ANON_KEY';
+const SUPABASE_URL  = 'https://zazxiaenvfgasgxboetf.supabase.co';
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InphenhpYWVudmZnYXNneGJvZXRmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg4MTAzODAsImV4cCI6MjA5NDM4NjM4MH0.OMhK_XhE-u7KiMOQ7jMbIqUfh1niBlZWxdNHHtcbMF8';
 // ============================================================
 
 let db;
